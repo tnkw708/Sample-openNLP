@@ -7,20 +7,38 @@ import opennlp.tools.namefind.NameFinderME
 import opennlp.tools.namefind.TokenNameFinderModel
 import opennlp.tools.util.Span
 import java.io.File
+import java.io.IOException
+import java.io.InputStreamReader
+import kotlin.system.exitProcess
 
 object SampleNameFinder {
-    private val MODEL = "my-model.bin"
+    private val MODEL = "kenji-miyazawa.bin"
     private val TOKENIZER: Tokenizer = Tokenizer.Builder().mode(TokenizerBase.Mode.NORMAL).build()
+    // https://www.aozora.gr.jp/cards/000081/files/470_15407.html
+    private val GAUCHE = ClassLoader.getSystemResourceAsStream("gauche-the-cellist.txt")
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val sentence = "東京では雨が降っている。"
-        val tokens: List<Token> = sentence.tokenize()
-        val surfaces: List<String> = tokens.map { token -> token.surface }
-        val spans: List<Span> = tokens.analyze()
+        val sentences: List<String> = InputStreamReader(GAUCHE).use {
+            try {
+                it.readLines()
+            } catch (e: IOException) {
+                e.printStackTrace()
+                exitProcess(1)
+            }
+        }
 
-        spans.forEach { span ->
-            println("Span(${span.start},${span.end},${span.type}) = ${span.toStr(surfaces)}")
+        sentences.forEach { sentence ->
+            val tokens: List<Token> = sentence.tokenize()
+            val surfaces: List<String> = tokens.map { token -> token.surface }
+            val spans: List<Span> = tokens.analyze()
+
+            println(sentence)
+            spans.forEach { span ->
+                println("Span(${span.start},${span.end},${span.type}) = ${span.toStr(surfaces)}")
+            }
+
+            println()
         }
     }
 
