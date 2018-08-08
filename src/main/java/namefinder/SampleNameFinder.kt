@@ -1,0 +1,4 @@
+package namefinder
+
+class SampleNameFinder {
+}
