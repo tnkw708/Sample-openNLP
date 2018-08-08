@@ -16,12 +16,12 @@
 ## 学習データの作成
 [公式ドキュメント][OpenNLP-NERecognition]
 
-下記のようなラベル付き文章を作成します。
+ラベル付き文章を作成します。
 **OpenNLP は形態素ごとにスペースで区切られていることを前提としているため、予め形態素解析を行いスペースで区切っておく必要があります。**
 また、学習データ間 (文と文の間) には空行をはさみます。
 ラベルは自由に付与できます。
 
-```
+```ラベル付き文章
 『 <START:作品名> 注文 の 多い 料理 店 <END> 』 （ ち ゅうもんのおおいりょうりてん ） は 、 <START:人名> 宮沢 賢治 <END> の 児童 文学 の 短 編集 で あり 、 また その 中 に 収録 さ れ た 表題 作 で ある 。
 ```
 
@@ -145,6 +145,8 @@ class SampleNameFinder {
 }
 ```
 
+[実際のコード][NameFinder]
+
 ## 実際に動かしてみた
 学習用データは、 [宮沢賢治の「注文の多い料理店」][restaurant]を用いました。
 学習用データ名は `kenji-miyazawa.txt` としました。
@@ -246,13 +248,14 @@ OpenNLP を用いて学習データの作成、及びそれを利用した文章
 
 ## 参考
 * [Apache OpenNLP Developer Documentaion][OpenNLP-Document]
-* [最新 Apache OpenNLP 1.9.0 で日本語固有表現抽出を試す]: https://www.rondhuit.com/apache-opennlp-1-9-0-ja-ner.html
+* [最新 Apache OpenNLP 1.9.0 で日本語固有表現抽出を試す](https://www.rondhuit.com/apache-opennlp-1-9-0-ja-ner.html)
 
 
 [restaurant]: https://www.aozora.gr.jp/cards/000081/files/43754_17659.html
 [gauche]: https://www.aozora.gr.jp/cards/000081/files/470_15407.html
 [kuromoji]: https://www.atilika.com/ja/kuromoji/
 [ModelGenerator]: https://github.com/lasta/sample-opennlp/blob/master/src/main/java/generator/ModelGenerator.kt
+[NameFinder]: https://github.com/lasta/sample-opennlp/blob/master/src/main/java/namefinder/SampleNameFinder.kt
 [OpenNLP-TrainingAPI]: https://opennlp.apache.org/docs/1.9.0/manual/opennlp.html#tools.langdetect.training.api
 [Rondhuit-training]: https://www.rondhuit.com/opennlp-%E6%9C%80%E5%A4%A7%E3%82%A8%E3%83%B3%E3%83%88%E3%83%AD%E3%83%94%E3%83%BC%E6%B3%95%E3%81%A8%E3%83%91%E3%83%BC%E3%82%BB%E3%83%97%E3%83%88%E3%83%AD%E3%83%B3%E3%81%AE%E5%88%86%E9%A1%9E%E5%99%A8.html
 [SolrJP21]: https://solr.doorkeeper.jp/events/75586
