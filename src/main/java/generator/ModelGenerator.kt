@@ -10,6 +10,7 @@ import kotlin.system.exitProcess
 
 object ModelGenerator {
     private val TOKENIZER: Tokenizer = Tokenizer.Builder().mode(TokenizerBase.Mode.NORMAL).build()
+    // https://www.aozora.gr.jp/cards/000081/files/43754_17659.html
     private val INPUT_FILE by lazy { ClassLoader.getSystemResourceAsStream("restaurant-with-a-lot-of-orders.txt") }
     private const val OUTPUT_FILE_PATH = "kenji-miyazawa.train"
 
